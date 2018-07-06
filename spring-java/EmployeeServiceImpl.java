@@ -9,8 +9,8 @@ import com.example.model.Employee;
 import com.example.repository.EmployeeRepository;
 
 @Service("employeeService")
-public class EmployeeServiceImpl implements EmployeeService {
 
+public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	EmployeeRepository employeeRepository;
 
@@ -27,6 +27,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public Employee addOne(String name, String lastname, boolean active) {
 		return employeeRepository.save(new Employee(name, lastname, active));
+	}
+
+	@Override
+	public Employee updateOne(long id, String name, String lastname, boolean active) {
+		Employee a = employeeRepository.findOne(id);
+		a.setName(name);
+		a.setLastName(lastname);
+		a.setActive(active);
+		return employeeRepository.save(a);
+	}
+
+	@Override
+	public void deleteOne(long id) {
+		employeeRepository.delete(id);
 	}
 
 }

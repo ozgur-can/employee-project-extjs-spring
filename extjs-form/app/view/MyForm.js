@@ -63,23 +63,49 @@ Ext.define('MyApp.view.MyForm', {
         {
             xtype: 'button',
             id: 'but2',
-            margin: '10 10',
+            margin: '10 10 50',
             text: 'Getir',
             listeners: {
                 click: 'onBut2Click'
+            }
+        },
+        {
+            xtype: 'textfield',
+            anchor: '20%',
+            id: 'id_',
+            fieldLabel: 'id'
+        },
+        {
+            xtype: 'button',
+            id: 'but3',
+            margin: '10 10',
+            text: 'Guncelle',
+            listeners: {
+                click: 'onBut3Click'
+            }
+        },
+        {
+            xtype: 'button',
+            id: 'but4',
+            margin: '10 10',
+            text: 'Sil',
+            listeners: {
+                click: 'onBut4Click'
             }
         },
     ]
 
 });
 
-Ext.create('Ext.data.Store', {
+var myStore = Ext.create('Ext.data.Store', {
     storeId: 'employeeStore',
+    autoSync: true,
     fields: ['id', 'name', 'lastName', 'active'],
-    data: []
+    data: [],
 });
 
-Ext.create('Ext.grid.Panel', {
+var myGrid = Ext.create('Ext.grid.Panel', {
+    id: 'empGrid',
     title: 'Employees',
     store: Ext.data.StoreManager.lookup('employeeStore'),
     columns: [
